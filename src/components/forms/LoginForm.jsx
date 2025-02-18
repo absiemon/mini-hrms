@@ -27,8 +27,11 @@ const LoginForm = () => {
     if (!email || !password) return toast.error('All Fields Required');
     const res = await doLogin({ email, password });
     const { success } = res;
-    if (success)
+    if (success){
       dispatch(setAuth(res.user));
+      localStorage.setItem('accessToken', res.accessToken);
+      localStorage.setItem('refreshToken', res.refreshToken);
+    }
     else
       toast.error('Invalid credentials')
   }

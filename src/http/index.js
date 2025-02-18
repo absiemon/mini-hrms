@@ -3,13 +3,24 @@ console.log("process.env.MODE", process.env.REACT_APP_MODE)
 
 const api = axios.create({
     baseURL: `${process.env.REACT_APP_MODE === 'DEVELOPMENT' ? process.env.REACT_APP_DEV_BASE_URL : process.env.REACT_APP_PROD_BASE_URL}/api`,
-    withCredentials: true
+    withCredentials: true,
 })
+
+// Add a request interceptor
+api.interceptors.request.use(
+    async function (config) {
+        // Set headers
+        config.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
+        config.headers['refresh-token'] = localStorage.getItem('refreshToken');
+        return config;
+    },
+    function (error) {
+        return Promise.reject(error);
+    }
+);
 
 //Auth
 export const doLogin = data => api.post('/auth/login', data);
-export const forgotPassword = data => api.post('/auth/forgot', data);
-export const resetPassword = data => api.patch('/auth/reset', data);
 export const dLogout = () => api.get('/auth/logout');
 
 //Admin

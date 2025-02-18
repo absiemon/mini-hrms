@@ -5,13 +5,15 @@ import { dLogout } from "../../http";
 import { setAuth } from "../../store/auth-slice";
 
 const Admin = () => {
-  
+
   const dispatch = useDispatch();
   const history = useHistory();
 
   const logout = async () => {
     await dLogout();
     dispatch(setAuth(null))
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     return history.push('/login');
   }
 

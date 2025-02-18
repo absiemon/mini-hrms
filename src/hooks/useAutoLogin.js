@@ -3,30 +3,31 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuth } from "../store/auth-slice";
+import api from "../http";
 
-export const useAutoLogin = () =>
-{
-    const [loading,setLoading] = useState(true);
+export const useAutoLogin = () => {
+    const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
-    useEffect(()=>{
-        (async()=>
-        {
-            try{
-                const res = await axios.get(`${process.env.REACT_APP_MODE === 'DEVELOPMENT' ? process.env.REACT_APP_DEV_BASE_URL : process.env.REACT_APP_PROD_BASE_URL}/api/auth/refresh`,{
-                    withCredentials:true,
+    useEffect(() => {
+        (async () => {
+            try {
+                const res = await api.get(`${process.env.REACT_APP_MODE === 'DEVELOPMENT' ? process.env.REACT_APP_DEV_BASE_URL : process.env.REACT_APP_PROD_BASE_URL}/api/auth/refresh`, {
+                    withCredentials: true,
                 });
-                if(res.status===200)
-                {
-                    if(res.data.success)
+                if (res.status === 200) {
+                    if (res.data.success) {
                         dispatch(setAuth(res.data.user));
+                        localStorage.setItem('accessToken', res.data?.accessToken);
+                        localStorage.setItem('refreshToken', res.data?.refreshToken);
+                    }
+
                     setLoading(false)
                 }
                 else
                     setLoading(false)
 
             }
-            catch(err)
-            {
+            catch (err) {
                 console.log(err)
                 setLoading(false)
             }
