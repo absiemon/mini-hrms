@@ -8,6 +8,10 @@ This is a Full Stack HRMS Application With Role Bases Access Control. Both Admin
 - **AUTHENTICATION:** **JWT (JSON Web Tokens)**.
 - **ROLE-BASED ACCESS CONTROL (RBAC):** Admin/Hr and Employee have different permissions.
 
+- **Live url.**
+```bash
+https://mini-hrms-qjod.onrender.com/
+```
 - **Demo account to see data.**
 ```bash
 ADMIN: admin@gmail.com  admin@123
