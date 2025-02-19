@@ -11,14 +11,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
 ReactDOM.render(
-  <HashRouter>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-        <ToastContainer />
-      </BrowserRouter>
-    </Provider>
-  </HashRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+      <ToastContainer />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 );
 
