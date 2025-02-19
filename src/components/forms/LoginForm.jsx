@@ -33,8 +33,8 @@ const LoginForm = () => {
     const { success } = res;
     if (success) {
       dispatch(setAuth(res.user));
-      localStorage.setItem('accessToken', res.accessToken);
-      localStorage.setItem('refreshToken', res.refreshToken);
+      localStorage.setItem('accessToken', res?.accessToken);
+      localStorage.setItem('refreshToken', res?.refreshToken);
       setLoading(false);
     }
     else {
