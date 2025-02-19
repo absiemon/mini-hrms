@@ -128,10 +128,10 @@ const AddUser = () => {
                         <div className="card-body pr-5 pl-5 m-1">
                             <form className='row' onSubmit={onSubmit} id='addUserForm'>
                                 <div className="form-group col-md-12 text-center">
-                                    <div className="input-group justify-content-center">
+                                    {/* <div className="input-group justify-content-center">
                                         <input type="file" id='profile' name='profile' className="form-control d-none" onChange={captureImage} accept="image/*" />
                                         <label htmlFor='profile'> <img className='rounded' src={imagePreview} width='120' alt="" /> </label>
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 <div className="form-group col-md-6">
