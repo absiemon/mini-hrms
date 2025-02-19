@@ -10,6 +10,7 @@ const LoginForm = () => {
     email: '',
     password: ''
   });
+  const [loading, setLoading] = useState(false)
 
   const inputEvent = (e) => {
     const { name, value } = e.target;
@@ -25,15 +26,21 @@ const LoginForm = () => {
     e.preventDefault();
     const { email, password } = formData;
     if (!email || !password) return toast.error('All Fields Required');
+
+    setLoading(true);
+
     const res = await doLogin({ email, password });
     const { success } = res;
-    if (success){
+    if (success) {
       dispatch(setAuth(res.user));
       localStorage.setItem('accessToken', res.accessToken);
       localStorage.setItem('refreshToken', res.refreshToken);
+      setLoading(false);
     }
-    else
+    else {
       toast.error('Invalid credentials')
+      setLoading(false);
+    }
   }
 
   return (
@@ -63,8 +70,8 @@ const LoginForm = () => {
 
 
                     <div className="form-group">
-                      <button type="submit" className="btn btn-primary btn-lg btn-block" tabIndex="4">
-                        Login
+                      <button type="submit" className="btn btn-primary btn-lg btn-block" tabIndex="4" disabled={loading}>
+                        {loading ? 'Logging in' : 'Login'}
                       </button>
                     </div>
                   </form>
