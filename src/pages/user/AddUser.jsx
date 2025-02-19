@@ -37,9 +37,9 @@ const AddUser = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const { name, email, mobile, password, type, address, profile } = formData;
+        const { name, email, mobile, password, type, address } = formData;
         if (!name || !email || !mobile || !password || !type || !address) return toast.error('All Field Required');
-        if (!profile) return toast.error('Please choose an image');
+       
         if (type === 'Admin' && !showModal) { setShowModal(true); return };
         const fd = new FormData();
         Object.keys(formData).map((key) => {
