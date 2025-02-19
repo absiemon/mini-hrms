@@ -17,12 +17,7 @@ export const useAutoLogin = () => {
 
                 console.log("res", res)
                 if (res.status === 200 || res.success === true) {
-                    if (res.data.success) {
-                        dispatch(setAuth(res.user));
-                        localStorage.setItem('accessToken', res.data?.accessToken);
-                        localStorage.setItem('refreshToken', res.data?.refreshToken);
-                    }
-
+                    dispatch(setAuth(res.user));
                     setLoading(false)
                 }
                 else
